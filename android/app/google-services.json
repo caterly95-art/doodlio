@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "78640647949",
+    "project_id": "borrow-e7211",
+    "storage_bucket": "borrow-e7211.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78640647949:android:5273b2689053fbba856a44",
+        "android_client_info": {
+          "package_name": "com.borrow.company"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgNJb4uARSLXr280-4le1cBmVsEFPvDIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+

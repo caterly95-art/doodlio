@@ -1,0 +1,39 @@
+{
+  "rules": {
+    "rooms": {
+      ".read": "auth != null",
+      "$roomId": {
+        ".write": "auth != null",
+        "strokes": {
+          ".read": "auth != null",
+          // Only the active drawer can push strokes
+          "$strokeId": {
+            ".write": "auth != null && (data.exists() || newData.child('drawerId').val() == auth.uid || root.child('rooms').child($roomId).child('currentDrawerId').val() == auth.uid)"
+          }
+        },
+        "chat": {
+          ".read": "auth != null",
+          "$msgId": {
+            ".write": "auth != null && (!data.exists() || data.child('senderId').val() == auth.uid)"
+          }
+        },
+        "players": {
+          ".read": "auth != null",
+          "$uid": {
+            // Player can update their own state or host can update
+            ".write": "auth != null && (auth.uid == $uid || root.child('rooms').child($roomId).child('hostId').val() == auth.uid)"
+          }
+        }
+      }
+    },
+    "secret_words": {
+      "$roomId": {
+        // Only the current drawer or host can read the secret word
+        ".read": "auth != null && (root.child('rooms').child($roomId).child('currentDrawerId').val() == auth.uid || root.child('rooms').child($roomId).child('hostId').val() == auth.uid)",
+        // Only current drawer or host can set secret word
+        ".write": "auth != null && (root.child('rooms').child($roomId).child('currentDrawerId').val() == auth.uid || root.child('rooms').child($roomId).child('hostId').val() == auth.uid)"
+      }
+    }
+  }
+}
+
